@@ -9,7 +9,7 @@ import (
 func combine(nums []int, list map[int]int, start, end, index, size int) {
 	if index == size {
 		for j := 0; j < size; j++ {
-			fmt.Fprintf(writer, " %2d", list[j])
+			fmt.Fprint(writer, " ", list[j])
 		}
 		fmt.Fprintln(writer, "")
 		return
