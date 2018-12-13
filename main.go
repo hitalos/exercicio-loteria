@@ -8,7 +8,10 @@ import (
 func combine(nums []string, list []string, start, end, index, size int) {
 	if index == size {
 		for j := 0; j < size; j++ {
-			writer.WriteString(" " + list[j])
+			if j > 0 {
+				writer.WriteString(" ")
+			}
+			writer.WriteString(list[j])
 		}
 		writer.WriteString("\n")
 		return
