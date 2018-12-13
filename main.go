@@ -2,16 +2,16 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"os"
+	"strconv"
 )
 
 func combine(nums []int, list []int, start, end, index, size int) {
 	if index == size {
 		for j := 0; j < size; j++ {
-			fmt.Fprint(writer, " ", list[j])
+			writer.WriteString(" " + strconv.Itoa(list[j]))
 		}
-		fmt.Fprintln(writer, "")
+		writer.WriteString("\n")
 		return
 	}
 
