@@ -5,31 +5,37 @@ import (
 	"os"
 )
 
-func combine(nums []string, list []string, start, end, index, size int) {
+func combine(nums [][]byte, list [][]byte, start, index int) {
 	if index == size {
 		for j := 0; j < size; j++ {
 			if j > 0 {
-				writer.WriteString(" ")
+				writer.WriteByte(' ')
 			}
-			writer.WriteString(list[j])
+			writer.Write(list[j])
 		}
-		writer.WriteString("\n")
+		writer.WriteByte('\n')
 		return
 	}
 
 	for i := start; i <= end && end >= size-index; i++ {
-		list[index] = string(nums[i])
-		combine(nums, list, i+1, end, index+1, size)
+		list[index] = nums[i]
+		combine(nums, list, i+1, index+1)
 	}
 }
 
 var writer *bufio.Writer
+var size, end int
 
 func main() {
-	size := 8
-	nums := []string{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32"}
-	list := make([]string, size)
+	args := []string{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32"}
+	nums := [][]byte{}
+	for _, num := range args {
+		nums = append(nums, []byte(num))
+	}
+	size = 8
+	end = len(nums) - 1
+	list := make([][]byte, size)
 	writer = bufio.NewWriter(os.Stdout)
-	combine(nums, list, 0, len(nums)-1, 0, size)
+	combine(nums, list, 0, 0)
 	writer.Flush()
 }
