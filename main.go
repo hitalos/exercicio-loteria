@@ -11,9 +11,9 @@ const max = 32
 func combine(nums [][]byte, list [][]byte, start, index int) {
 	if index == size {
 		for j := 0; j < size; j++ {
-			writer.Write(list[j])
+			_, _ = writer.Write(list[j])
 		}
-		writer.WriteByte('\n')
+		_ = writer.WriteByte('\n')
 		return
 	}
 
@@ -40,5 +40,5 @@ func main() {
 	list := make([][]byte, size)
 	writer = bufio.NewWriter(os.Stdout)
 	combine(nums, list, 0, 0)
-	writer.Flush()
+	_ = writer.Flush()
 }
