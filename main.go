@@ -3,7 +3,10 @@ package main
 import (
 	"bufio"
 	"os"
+	"strconv"
 )
+
+const max = 32
 
 func combine(nums [][]byte, list [][]byte, start, index int) {
 	if index == size {
@@ -24,10 +27,13 @@ var writer *bufio.Writer
 var size, end int
 
 func main() {
-	args := []string{"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32"}
 	nums := [][]byte{}
-	for _, num := range args {
-		nums = append(nums, []byte(num))
+	leftPad := "0"
+	for i := 1; i <= max; i++ {
+		if i > 9 {
+			leftPad = ""
+		}
+		nums = append(nums, []byte(leftPad+strconv.Itoa(i)))
 	}
 	size = 8
 	end = len(nums) - 1
