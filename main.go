@@ -2,7 +2,9 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"os"
+	"runtime/pprof"
 	"strconv"
 )
 
@@ -27,6 +29,15 @@ var writer *bufio.Writer
 var size, end int
 
 func main() {
+	saveProfile := flag.Bool("profile", false, "save profile")
+	flag.Parse()
+
+	if *saveProfile {
+		f, _ := os.Create("cpu.prof")
+		pprof.StartCPUProfile(f)
+		defer pprof.StopCPUProfile()
+	}
+
 	nums := [][]byte{}
 	leftPad := "0"
 	for i := 1; i <= max; i++ {
